@@ -11,10 +11,6 @@ var combinedResource = new CollatedComputeResource(config);
 // This router exposes any end points that are to be useable for customers
 var router = express.Router();
 
-router.get('/', function (req, res) {
-    res.end('User router reached. ' + computeValue);
-});
-
 router.post('/upload', function (req, res) {
     console.log('Request received at /upload');
     if (req.files && req.files.length === 1) {
@@ -25,8 +21,8 @@ router.post('/upload', function (req, res) {
         });
         let audResult = audProcess.process('input.mp4');
         let vidResult = vidProcess.process('input.mp4');
-        console.log('BEFOER PROMISE.ALL: audio:', audResult);
-        console.log('BEFORE PROMISE.ALL: video:', vidProcess);
+        console.log('BEFORE PROMISE.ALL: audio:', audResult);
+        console.log('BEFORE PROMISE.ALL: video:', vidResult);
 
         return Promise.all([audResult, vidResult]).then(() => {
             res.end('File uploaded');
